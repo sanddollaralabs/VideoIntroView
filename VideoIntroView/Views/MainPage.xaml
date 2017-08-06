@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+	prism:ViewModelLocator.AutowireViewModel="True" 
+	x:Class="VideoIntroView.Views.MainPage"
+	xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+	xmlns:local="clr-namespace:VideoIntroView" 
+	BackgroundColor="Black">
+
+	<ContentPage.Content>
+		<AbsoluteLayout>
+			<local:VideoPlayerView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" x:Name="videoPlayer" />
+
+	       	<StackLayout HorizontalOptions="FillAndExpand"
+	               VerticalOptions="FillAndExpand"
+	               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+	               AbsoluteLayout.LayoutFlags="All"
+	               x:Name="logoLayout"
+				   BackgroundColor="#40000000" >
+	          <StackLayout Padding="30">
+				<Image Source="logo" HeightRequest="65" WidthRequest="65" />
+	          </StackLayout>
+			</StackLayout>
+
+	
+			<control:CarouselView ItemsSource="{Binding MyDataSource}" 
+				AbsoluteLayout.LayoutBounds="0, 0.7, 1, 0.1" 
+                AbsoluteLayout.LayoutFlags="All" 
+				Position="{Binding Position, Mode=TwoWay}" >
+
+				<control:CarouselView.ItemTemplate>
+		          <DataTemplate>
+						<StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+		           			 <Label Text="{Binding Title}" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+							 <Label Text="{Binding Detail}" HorizontalTextAlignment="Center" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+						</StackLayout>
+		          </DataTemplate>
+		        </control:CarouselView.ItemTemplate>
+			</control:CarouselView>
+	
+
+			<local:CarouselIndicators IndicatorHeight="12" 
+				IndicatorWidth="12" 
+				UnselectedIndicator="unselected_circle.png" 
+				SelectedIndicator="selected_circle.png" 
+				Position="{Binding Position}" 
+				ItemsSource="{Binding MyDataSource}"
+				AbsoluteLayout.LayoutBounds="0, 0.95, 1, 0.1" 
+				AbsoluteLayout.LayoutFlags="All" 
+			/>
+
+		</AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>
